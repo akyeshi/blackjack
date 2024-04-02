@@ -1,0 +1,47 @@
+
+
+
+-------- Blackjack Game Rules -------- 
+(* specific rules and payouts may vary depending on the casino or online platform you are playing at)
+
+Introduction to Blackjack
+Blackjack, also known as Twenty-One, is a popular casino card game where the objective is to get a hand value closer to 21 than the dealer, without going over 21. It is one of the most widely played casino banking games in the world.
+
+The Deck and Card Values
+  - A standard deck of 52 cards is used.
+  - The cards have the following values:
+      • Numbered cards (2-10) are worth their face value.
+      • Face cards (Jack, Queen, King) are worth 10 points.
+      • Aces can be worth 1 or 11 points, depending on which value benefits the player's hand the most.
+
+The Objective
+The goal in Blackjack is to have a hand value that is higher than the dealer's hand, without exceeding 21.
+
+The Deal
+  - The player places a bet.
+  - The dealer deals two cards face up to the player and two cards, one face up and one face down, to themselves.
+
+Player's Options
+After the initial deal, the player has the following options:
+  1. Hit: The player requests an additional card from the dealer to try to get closer to 21.
+  2. Stand: The player is satisfied with their current hand and does not want any more cards.
+  3. Double Down: The player doubles their initial bet and receives one more card.
+  4. Split: If the player's first two cards are of the same rank, they can split them into two separate hands, each with a separate bet.
+  5. Insurance: If the dealer's face-up card is an Ace, the player can make an additional bet (up to half their original bet) that the dealer has Blackjack (a hand value of 21).
+
+Dealer's Play
+After the player has completed their turn, the dealer reveals their face-down card and follows a set of predetermined rules:
+  - If the dealer's hand is 16 or less, they must hit.
+  - If the dealer's hand is 17 or more, they must stand.
+
+Determining the Winner
+  - If the player's hand value is closer to 21 than the dealer's hand value, the player wins.
+  - If the player's hand value exceeds 21, the player loses (busts).
+  - If the player and the dealer have the same hand value, it is a push (tie), and the player's bet is returned.
+  - If the player has Blackjack (an Ace and a 10-value card), they win 3:2 on their bet, unless the dealer also has Blackjack, in which case it is a push.
+
+Additional Rules and Variations
+There are various rules and variations that can be found in different Blackjack games, such as:
+  - Surrender: The player can forfeit half their bet and give up their hand.
+  - Blackjack Payouts: Some casinos may offer different payout ratios for Blackjack, such as 6:5 or 3:2.
+  - Side Bets: Some Blackjack games offer optional side bets, such as "Perfect Pairs" or "21+3".
