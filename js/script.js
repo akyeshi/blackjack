@@ -58,16 +58,21 @@ let deck = createDeck();
 let playerHand = [];
 let dealerHand = [];
 let result = "";
+let gameInProgress = false;
 
 // Deal the initial cards
 function dealInitialCards() {
-  playerHand = [];
+  playerHand = []; // way to reset to 2 cards when 'deal' button is clicked
   dealerHand = [];
   playerHand.push(dealCard(deck));
   dealerHand.push(dealCard(deck));
   playerHand.push(dealCard(deck));
   dealerHand.push(dealCard(deck));
+  // console.log(dealerHand);
+  // console.log(playerHand);
   updateGameState();
+  gameInProgress = true;
+  enableButtons();
 }
 
 // Update the game state
@@ -99,9 +104,11 @@ function updateGameState() {
   if (playerValue > 21) {
     result = "Bust! You lose.";
     resultElement.textContent = result;
+    disableButtons();
   } else if (playerValue === 21 && playerHand.length === 2) {
     result = "Blackjack! You win!";
     resultElement.textContent = result;
+    disableButtons();
   } else {
     resultElement.textContent = "";
   }
@@ -147,6 +154,17 @@ function determineWinner() {
   }
 
   resultElement.textContent = result;
+}
+
+// enable and disable buttons
+function enableButtons() {
+  document.getElementById("hit").disabled = false;
+  document.getElementById("stand").disabled = false;
+}
+
+function disableButtons() {
+  document.getElementById("hit").disabled = true;
+  document.getElementById("stand").disabled = true;
 }
 
 // Start the game

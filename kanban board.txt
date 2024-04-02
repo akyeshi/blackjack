@@ -1,0 +1,4 @@
+
+
+1. get actual images 
+2. refactor code 
