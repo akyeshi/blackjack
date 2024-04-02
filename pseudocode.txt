@@ -1,0 +1,65 @@
+
+// Define the suits and ranks of the cards
+initialize suits as ['♥', '♦', '♣', '♠']
+initialize ranks as ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+
+// Create a deck of cards
+function createDeck(): 
+  loop over suits and ranks and returns a deck of 52 cards. 
+
+// Deal a card from the deck
+ function dealCard(deck): 
+    remove & return a random card from the deck
+
+// Calculate the value of a hand
+function calculateHandValue(hand)
+    initialize value to 0
+    initialize hasAce to false
+    for each card in hand
+        if the card's rank is 'A'
+            set hasAce to true
+            add 11 to value
+        else if the card's rank is 'J', 'Q', or 'K'
+            add 10 to value
+        else
+            add the numeric value of the card's rank to value
+    if hasAce and value > 21
+        subtract 10 from value
+    return value
+
+// Game logic
+function playGame()
+    initialize the deck
+    initialize the player's hand to an empty array
+    initialize the dealer's hand to an empty array
+    initialize the result to an empty string
+
+    // Deal the initial cards
+    deal two cards to the player
+    deal two cards to the dealer
+
+    // Player's turn
+    while the player's hand value is less than 21
+        if the player chooses to hit
+            deal a card to the player
+        else
+            break the loop
+
+    // Dealer's turn
+    while the dealer's hand value is less than 17
+        deal a card to the dealer
+
+    // Determine the winner
+    if the player's hand value is greater than 21
+        set the result to "Bust! You lose."
+    else if the dealer's hand value is greater than 21
+        set the result to "Dealer busts! You win."
+    else if the player's hand value is equal to the dealer's hand value
+        set the result to "It's a push."
+    else if the player's hand value is greater than the dealer's hand value
+        set the result to "You win!"
+    else
+        set the result to "Dealer wins."
+
+    // Display the result
+    display the result
