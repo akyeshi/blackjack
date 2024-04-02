@@ -1,4 +1,4 @@
 
 
-1. get actual images 
-2. refactor code 
+1. center the entire container 
+2. 

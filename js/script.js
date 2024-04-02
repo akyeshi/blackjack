@@ -16,7 +16,7 @@ const ranks = [
   "K",
 ];
 
-// Create a deck of 52 cards (array of card objects)
+// Create a deck of 52 cards (array of card objects): [{suit, rank}, {suit, rank} ...]
 function createDeck() {
   const deck = [];
   for (let i = 0; i < suits.length; i++) {
@@ -24,12 +24,13 @@ function createDeck() {
       deck.push({ suit: suits[i], rank: ranks[j] });
     }
   }
-  // console.log(deck)
+  console.log(deck);
   return deck;
 }
 
 // Deal a random card from the deck (of 52 cards)
 function dealCard(deck) {
+  // splice returns a modified or mutated array of deckcard-objects
   return deck.splice(Math.floor(Math.random() * deck.length), 1)[0];
 }
 
@@ -62,15 +63,17 @@ let gameInProgress = false;
 
 // Deal the initial cards
 function dealInitialCards() {
-  playerHand = []; // way to reset to 2 cards when 'deal' button is clicked
   dealerHand = [];
-  playerHand.push(dealCard(deck));
+  playerHand = []; // way to reset to 2 cards when 'deal' button is clicked
+  playerHand.push(dealCard(deck)); // never two cards of the same suit/rank will be dealt
   dealerHand.push(dealCard(deck));
   playerHand.push(dealCard(deck));
   dealerHand.push(dealCard(deck));
-  // console.log(dealerHand);
-  // console.log(playerHand);
   updateGameState();
+
+  console.log(`dealer's hand: ${dealerHand[0].suit}`);
+  console.log(`player's hand: ${playerHand[0].suit}`);
+
   gameInProgress = true;
   enableButtons();
 }
@@ -164,7 +167,9 @@ function enableButtons() {
 
 function disableButtons() {
   document.getElementById("hit").disabled = true;
+  document.getElementById("hit").style.cursor = "auto";
   document.getElementById("stand").disabled = true;
+  document.getElementById("stand").style.cursor = "auto";
 }
 
 // Start the game
