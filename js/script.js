@@ -1,5 +1,5 @@
 // Define the suits and ranks of the cards
-const suits = ["♥", "♦", "♣", "♠"];
+const suits = ["♥", "⬥", "♣", "♠"];
 const ranks = [
   "A",
   "2",
@@ -35,6 +35,7 @@ function dealCard(deck) {
 }
 
 // Calculate the value of a hand
+// const x = calculateHandValue([{suit: '♥', rank: '8'}, {suit: '♦', rank: 'A'}]);
 function calculateHandValue(hand) {
   let value = 0;
   let hasAce = false;
@@ -48,6 +49,7 @@ function calculateHandValue(hand) {
       value += parseInt(hand[i].rank);
     }
   }
+  // let ace value be 1, so player's hand will be below 21
   if (hasAce && value > 21) {
     value -= 10;
   }
@@ -65,14 +67,14 @@ let gameInProgress = false;
 function dealInitialCards() {
   dealerHand = [];
   playerHand = []; // way to reset to 2 cards when 'deal' button is clicked
+  dealerHand.push(dealCard(deck));
   playerHand.push(dealCard(deck)); // never two cards of the same suit/rank will be dealt
   dealerHand.push(dealCard(deck));
   playerHand.push(dealCard(deck));
-  dealerHand.push(dealCard(deck));
   updateGameState();
 
-  console.log(`dealer's hand: ${dealerHand[0].suit}`);
-  console.log(`player's hand: ${playerHand[0].suit}`);
+  console.log(`dealer's hand: ${dealerHand[0].rank}${dealerHand[0].suit}`);
+  console.log(`player's hand: ${playerHand[0].rank}${playerHand[1].suit}`);
 
   gameInProgress = true;
   enableButtons();
@@ -88,6 +90,7 @@ function updateGameState() {
   dealerHandElement.innerHTML = "";
 
   for (let i = 0; i < playerHand.length; i++) {
+    console.log("playerhand: ", playerHand);
     const card = document.createElement("div");
     card.classList.add("card");
     card.textContent = `${playerHand[i].rank}${playerHand[i].suit}`;
@@ -101,20 +104,20 @@ function updateGameState() {
     dealerHandElement.appendChild(card);
   }
 
-  const playerValue = calculateHandValue(playerHand);
-  const dealerValue = calculateHandValue(dealerHand);
+  // const playerValue = calculateHandValue(playerHand);
+  // const dealerValue = calculateHandValue(dealerHand);
 
-  if (playerValue > 21) {
-    result = "Bust! You lose.";
-    resultElement.textContent = result;
-    disableButtons();
-  } else if (playerValue === 21 && playerHand.length === 2) {
-    result = "Blackjack! You win!";
-    resultElement.textContent = result;
-    disableButtons();
-  } else {
-    resultElement.textContent = "";
-  }
+  // if (playerValue > 21) {
+  //   result = "Bust! You lose.";
+  //   resultElement.textContent = result;
+  //   disableButtons();
+  // } else if (playerValue === 21 && playerHand.length === 2) {
+  //   result = "Blackjack! You win!";
+  //   resultElement.textContent = result;
+  //   disableButtons();
+  // } else {
+  //   resultElement.textContent = "";
+  // }
 }
 
 // Event listeners
@@ -125,11 +128,11 @@ document.getElementById("hit").addEventListener("click", () => {
 });
 
 document.getElementById("stand").addEventListener("click", () => {
-  while (calculateHandValue(dealerHand) < 17) {
+  if (calculateHandValue(dealerHand) < 17) {
     dealerHand.push(dealCard(deck));
   }
   updateGameState();
-  determineWinner();
+  determineWinner()
 });
 
 document.getElementById("deal").addEventListener("click", () => {
@@ -146,23 +149,31 @@ function determineWinner() {
 
   if (playerValue > 21) {
     result = "Bust! You lose.";
+    // disableButtons();
   } else if (dealerValue > 21) {
     result = "Dealer busts! You win.";
+    // disableButtons();
   } else if (playerValue === dealerValue) {
     result = "It's a push.";
+    // disableButtons();
   } else if (playerValue > dealerValue) {
     result = "You win!";
+    // disableButtons();
   } else {
     result = "Dealer wins.";
+    // disableButtons();
   }
 
   resultElement.textContent = result;
+  disableButtons();
 }
 
 // enable and disable buttons
 function enableButtons() {
   document.getElementById("hit").disabled = false;
+  document.getElementById("hit").style.cursor = "pointer";
   document.getElementById("stand").disabled = false;
+  document.getElementById("stand").style.cursor = "pointer";
 }
 
 function disableButtons() {
