@@ -56,6 +56,19 @@ button {
   cursor: pointer;
 }
 
+#chips {
+  /* background-color: red; */
+  width: auto; 
+  height: 50px; 
+  padding: 20px; 
+  margin-top: 20px; 
+}
+
+#chips>button {
+  background-color: black;
+  border-radius: 50%; 
+}
+
 #result {
   color: red; 
   margin-top: 30px; 
