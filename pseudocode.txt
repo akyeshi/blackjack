@@ -12,44 +12,41 @@ function createDeck():
     remove & return a random card from the deck
 
 // Calculate the value of a hand
-function calculateHandValue(hand)
-    initialize value to 0
-    initialize hasAce to false
-    for each card in hand
-        if the card's rank is 'A'
-            set hasAce to true
-            add 11 to value
-        else if the card's rank is 'J', 'Q', or 'K'
-            add 10 to value
-        else
-            add the numeric value of the card's rank to value
-    if hasAce and value > 21
-        subtract 10 from value
-    return value
+function calculateHandValue(hand): 
+    calculate player's hand value
 
-// Game logic
-function playGame()
-    initialize the deck
-    initialize the player's hand to an empty array
-    initialize the dealer's hand to an empty array
-    initialize the result to an empty string
+// Game state variables 
+initialize the deck
+initialize the player's hand to an empty array
+initialize the dealer's hand to an empty array
+initialize the result to an empty string
+initialize the gameInProgress flag to false 
 
-    // Deal the initial cards
+// Deal the initial cards 
+function dealInitialCards(): 
     deal two cards to the player
     deal two cards to the dealer
+  
+    updateGameState(): update game state with the dealt cards 
+    flip the gameInProgress flag to true 
+    enable 'hit' and 'stand' and 'deal' button to be clickable 
 
-    // Player's turn
-    while the player's hand value is less than 21
-        if the player chooses to hit
-            deal a card to the player
-        else
-            break the loop
 
-    // Dealer's turn
-    while the dealer's hand value is less than 17
-        deal a card to the dealer
+// Update the game state 
+function updateGameState(): 
+  make dealer's div element empty
+  make player's div element empty 
+  loop over dealer's cards, create & append to dealer's html div element 
+  loop over player's cards, create & append to player's html div element 
 
-    // Determine the winner
+
+// eventlistener 
+- 'hit': click hit, card dealt to playerhand, gamestate updated, winner determined 
+- 'stand': click stand, card dealt to dealerhand, gamestate updated, winner determined 
+- 'deal': click deal, deck of 52 cards created, cards dealt to both players, gamestate updated, dont' show any result 
+
+// win logic: deterine winner 
+function determineWinner(): 
     if the player's hand value is greater than 21
         set the result to "Bust! You lose."
     else if the dealer's hand value is greater than 21
@@ -60,6 +57,13 @@ function playGame()
         set the result to "You win!"
     else
         set the result to "Dealer wins."
+        
+// button logic 
+function enableButton(): 
+  enable button to be clickable 
 
-    // Display the result
-    display the result
+function disableButton(): 
+  disable button to be clickabel 
+
+// start the game 
+dealInitialCards(); 

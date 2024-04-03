@@ -1,4 +1,8 @@
 
 
 1. center the entire container 
-2. 
+2. add README file 
+3. deploy the repo as a github page: https://akyeshi.github.io 
+4. try 'debugger' in dev console to debug; set/add breakpoints in codebase lines
+5. debugger tools 
+6. 

@@ -86,8 +86,15 @@ function updateGameState() {
   const dealerHandElement = document.getElementById("dealer-hand");
   const resultElement = document.getElementById("result");
 
-  playerHandElement.innerHTML = "";
   dealerHandElement.innerHTML = "";
+  playerHandElement.innerHTML = "";
+
+  for (let i = 0; i < dealerHand.length; i++) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.textContent = `${dealerHand[i].rank}${dealerHand[i].suit}`;
+    dealerHandElement.appendChild(card);
+  }
 
   for (let i = 0; i < playerHand.length; i++) {
     console.log("playerhand: ", playerHand);
@@ -95,13 +102,6 @@ function updateGameState() {
     card.classList.add("card");
     card.textContent = `${playerHand[i].rank}${playerHand[i].suit}`;
     playerHandElement.appendChild(card);
-  }
-
-  for (let i = 0; i < dealerHand.length; i++) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.textContent = `${dealerHand[i].rank}${dealerHand[i].suit}`;
-    dealerHandElement.appendChild(card);
   }
 
   // const playerValue = calculateHandValue(playerHand);
@@ -132,7 +132,7 @@ document.getElementById("stand").addEventListener("click", () => {
     dealerHand.push(dealCard(deck));
   }
   updateGameState();
-  determineWinner()
+  determineWinner();
 });
 
 document.getElementById("deal").addEventListener("click", () => {
@@ -149,19 +149,14 @@ function determineWinner() {
 
   if (playerValue > 21) {
     result = "Bust! You lose.";
-    // disableButtons();
   } else if (dealerValue > 21) {
     result = "Dealer busts! You win.";
-    // disableButtons();
   } else if (playerValue === dealerValue) {
     result = "It's a push.";
-    // disableButtons();
   } else if (playerValue > dealerValue) {
     result = "You win!";
-    // disableButtons();
   } else {
     result = "Dealer wins.";
-    // disableButtons();
   }
 
   resultElement.textContent = result;
