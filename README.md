@@ -76,7 +76,7 @@ Once the game is loaded, you can start playing Blackjack by following these step
 
 1. Click the "Deal" button to receive your initial cards.
 
-2. Choose to "Hit" to receive another card, "Stand" to keep your current hand, or "Double Down" to double your bet and receive one more card.
+2. Choose to "Hit" to receive another card, "Stand" to keep your current hand.
 
 3. The dealer will then play their hand according to the game rules.
 
