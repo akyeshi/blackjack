@@ -2,7 +2,7 @@
 
 Welcome to the Blackjack Game repository! This project is a classic casino card game implemented using HTML, CSS, and JavaScript.
 
-![!Alt Blackjack](wireframe.png)
+![!Alt Blackjack](assets/images/wireframe.png)
 
 ## Table of Contents
 
