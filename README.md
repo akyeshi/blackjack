@@ -51,6 +51,7 @@ Blackjack, also known as twenty-one, is a popular casino banking game. The goal 
 - Responsive Design: The game is designed to be responsive, ensuring a seamless experience across different devices and screen sizes.
 - Score Tracking: The game keeps track of the player's score, allowing them to monitor their progress.
 - Dealer Algorithm: The dealer's actions are governed by a simple Dealer algorithm, providing a challenging opponent for the player.
+- Tasks in working progress: sound, card library, styling, better javascript algorithm design i.e. DRY principle, and more efficient coherence between logic pieces
 
 ## Installation
 
