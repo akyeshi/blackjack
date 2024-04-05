@@ -15,8 +15,6 @@ const ranks = [
   "Q",
   "K",
 ];
-let playerBankRoll = 300;
-let bettingTotal = 0;
 
 // Create a deck of 52 cards (array of card objects): [{suit, rank}, {suit, rank} ...]
 function createDeck() {
@@ -63,6 +61,8 @@ let deck = createDeck();
 let playerHand = [];
 let dealerHand = [];
 let result = "";
+let playerBankRoll = 1000;
+let bettingTotal = 0;
 let gameInProgress = false;
 
 // Deal the initial cards
