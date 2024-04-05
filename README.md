@@ -2,8 +2,8 @@
 
 Welcome to the Blackjack Game repository! This project is a classic casino card game implemented using HTML, CSS, and JavaScript. [live link](https://akyeshi.github.io/blackjack/)
 
-![!Alt Blackjack](assets/images/wireframe.png)
-![playing](assets/images/blackjacl.png)
+![Alt Blackjack](assets/images/wireframe.png)
+![Alt playing](assets/images/blackjacl.png)
 
 ## Table of Contents
 
