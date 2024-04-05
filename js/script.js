@@ -15,6 +15,8 @@ const ranks = [
   "Q",
   "K",
 ];
+let playerBankRoll = 300;
+let bettingTotal = 0;
 
 // Create a deck of 52 cards (array of card objects): [{suit, rank}, {suit, rank} ...]
 function createDeck() {
@@ -24,7 +26,7 @@ function createDeck() {
       deck.push({ suit: suits[i], rank: ranks[j] });
     }
   }
-  console.log(deck);
+  // console.log(deck);
   return deck;
 }
 
@@ -56,7 +58,7 @@ function calculateHandValue(hand) {
   return value;
 }
 
-// Game logic
+// State variables
 let deck = createDeck();
 let playerHand = [];
 let dealerHand = [];
@@ -77,10 +79,11 @@ function dealInitialCards() {
   console.log(`player's hand: ${playerHand[0].rank}${playerHand[1].suit}`);
 
   gameInProgress = true;
-  enableButtons();
+  disableButtons();
+  // enableButtons();
 }
 
-// Update the game state
+// Update the game state ---------------------------------------------
 function updateGameState() {
   const playerHandElement = document.getElementById("player-hand");
   const dealerHandElement = document.getElementById("dealer-hand");
@@ -93,17 +96,25 @@ function updateGameState() {
     const card = document.createElement("div");
     card.classList.add("card");
     card.textContent = `${dealerHand[i].rank}${dealerHand[i].suit}`;
+
+    // if (i == 0){
+    //   card.textContent = `${dealerHand[i].rank}${dealerHand[i].suit}`;
+    // } else if (i === 1){
+    //   card.textContent = `<❓>`;
+    // }
+
     dealerHandElement.appendChild(card);
   }
 
   for (let i = 0; i < playerHand.length; i++) {
-    console.log("playerhand: ", playerHand);
+    // console.log("playerhand: ", playerHand);
     const card = document.createElement("div");
     card.classList.add("card");
     card.textContent = `${playerHand[i].rank}${playerHand[i].suit}`;
     playerHandElement.appendChild(card);
   }
 
+  // comment out below this line
   // const playerValue = calculateHandValue(playerHand);
   // const dealerValue = calculateHandValue(dealerHand);
 
@@ -120,55 +131,72 @@ function updateGameState() {
   // }
 }
 
-// Event listeners
-document.getElementById("hit").addEventListener("click", () => {
-  playerHand.push(dealCard(deck));
-  updateGameState();
-  determineWinner();
-});
-
-document.getElementById("stand").addEventListener("click", () => {
-  if (calculateHandValue(dealerHand) < 17) {
-    dealerHand.push(dealCard(deck));
-  }
-  updateGameState();
-  determineWinner();
-});
-
-document.getElementById("deal").addEventListener("click", () => {
-  deck = createDeck();
-  dealInitialCards();
-  document.getElementById("result").textContent = "";
-});
-
-// Determine the winner
+// Determine the winner ------------------------------------
 function determineWinner() {
   const playerValue = calculateHandValue(playerHand);
   const dealerValue = calculateHandValue(dealerHand);
   const resultElement = document.getElementById("result");
 
   if (playerValue > 21) {
+    bettingTotal = 0;
+    document.querySelector("span#chip-bet").textContent = bettingTotal;
+    document.querySelector("span#bankroll").textContent = playerBankRoll;
     result = "Bust! You lose.";
   } else if (dealerValue > 21) {
+    playerBankRoll += bettingTotal * 2;
+    bettingTotal = 0;
+    document.querySelector("span#chip-bet").textContent = bettingTotal;
+    document.querySelector("span#bankroll").textContent = playerBankRoll;
     result = "Dealer busts! You win.";
   } else if (playerValue === dealerValue) {
+    bettingTotal = 0;
+    document.querySelector("span#chip-bet").textContent = bettingTotal;
     result = "It's a push.";
   } else if (playerValue > dealerValue) {
+    playerBankRoll += bettingTotal * 2;
+    bettingTotal = 0;
+    document.querySelector("span#chip-bet").textContent = bettingTotal;
+    document.querySelector("span#bankroll").textContent = playerBankRoll;
     result = "You win!";
   } else {
+    bettingTotal = 0;
+    document.querySelector("span#chip-bet").textContent = bettingTotal;
+    document.querySelector("span#bankroll").textContent = playerBankRoll;
     result = "Dealer wins.";
   }
 
   resultElement.textContent = result;
+  disableChipBtns();
   disableButtons();
 }
 
-// enable and disable buttons
+// bet chip and check if player has enough to bet ----------------------
+function betChip(chipValue) {
+  bettingTotal += chipValue;
+  playerBankRoll -= chipValue;
+  checkBetAmount(chipValue);
+  document.getElementById("chip-bet").textContent = bettingTotal;
+  document.getElementById("bankroll").textContent = playerBankRoll;
+  if (bettingTotal > 0) enableButtons();
+}
+
+function checkBetAmount(betAmount) {
+  if (playerBankRoll === 0 && betAmount > playerBankRoll) {
+    document.querySelectorAll("#chips button").forEach((button) => {
+      button.disabled = true;
+    });
+    alert("You no longer have funds to continue this addiction ...! Go Home!");
+  }
+}
+
+// enable and disable buttons ------------------------------------
 function enableButtons() {
   document.getElementById("hit").disabled = false;
   document.getElementById("hit").style.cursor = "pointer";
   document.getElementById("stand").disabled = false;
   document.getElementById("stand").style.cursor = "pointer";
+  document.getElementById("hit").style.backgroundColor = "white";
+  document.getElementById("stand").style.backgroundColor = "white";
 }
 
 function disableButtons() {
@@ -176,7 +204,65 @@ function disableButtons() {
   document.getElementById("hit").style.cursor = "auto";
   document.getElementById("stand").disabled = true;
   document.getElementById("stand").style.cursor = "auto";
+  document.getElementById("hit").style.backgroundColor = "grey";
+  document.getElementById("stand").style.backgroundColor = "grey";
 }
+
+// enable and disable chip-buttons ------------------------------
+function enableChipBtns() {
+  document.querySelectorAll(".chipBtn").forEach((button) => {
+    button.disabled = false;
+    button.style.cursor = "pointer";
+  });
+}
+
+function disableChipBtns() {
+  document.querySelectorAll(".chipBtn").forEach((button) => {
+    button.disabled = true;
+    button.style.cursor = "not-allowed";
+  });
+}
+
+// Event listeners ----------------------------------------------
+document.getElementById("hit").addEventListener("click", () => {
+  playerHand.push(dealCard(deck));
+  updateGameState();
+  determineWinner();
+});
+
+document.getElementById("stand").addEventListener("click", () => {
+  const dealerHandElement = document.getElementById("dealer-hand");
+  dealerHandElement.innerHTML = "";
+
+  for (let i = 0; i < dealerHand.length; i++) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.textContent = `${dealerHand[i].rank}${dealerHand[i].suit}`;
+    dealerHandElement.appendChild(card);
+  }
+  while (calculateHandValue(dealerHand) < 17) {
+    dealerHand.push(dealCard(deck));
+  }
+  updateGameState();
+  determineWinner();
+});
+
+document.getElementById("deal").addEventListener("click", () => {
+  document.querySelector("span#chip-bet").textContent = 0;
+  document.querySelector("span#bankroll").textContent = playerBankRoll;
+  deck = createDeck();
+  dealInitialCards();
+  enableChipBtns();
+  document.getElementById("result").textContent = "";
+});
+
+document.getElementById("chip-5").addEventListener("click", () => betChip(5));
+document.getElementById("chip-10").addEventListener("click", () => betChip(10));
+document.getElementById("chip-25").addEventListener("click", () => betChip(25));
+document.getElementById("chip-50").addEventListener("click", () => betChip(50));
+document
+  .getElementById("chip-100")
+  .addEventListener("click", () => betChip(100));
 
 // Start the game
 dealInitialCards();

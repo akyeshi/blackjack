@@ -15,6 +15,10 @@ body {
   height: 100vh; 
 }
 
+#stats>p {
+  text-indent: 30px; 
+}
+
 #player-hand, #dealer-hand {
   margin-bottom: 60px;
 }
@@ -50,24 +54,33 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   background-color: white;
-  color: green;
-  border: 1px solid red;
   border-radius: 5px;
   cursor: pointer;
+  border: 1px solid red;
 }
 
 #chips {
-  /* background-color: red; */
-  width: auto; 
-  height: 50px; 
   padding: 20px; 
   margin-top: 20px; 
 }
 
-#chips>button {
-  background-color: black;
+div#chips>button {
+  background-color: green;
+  border: 1px solid red;
   border-radius: 50%; 
 }
+
+#chip-bet, #bankroll {
+  height: 50px; 
+  width: 200px; 
+  margin: 0 auto; 
+  /* background-color: white; */
+  color: white; 
+  border-radius: 50px;
+  text-align: center;
+  padding-top: 20px; 
+}
+
 
 #result {
   color: red; 
