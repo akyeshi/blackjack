@@ -11,7 +11,7 @@
 
 ## Introduction
 
-Welcome to the Blackjack Game repository! This project is a classic casino card game implemented using HTML, CSS, and JavaScript. [live link](https://akyeshi.github.io/blackjack/)
+Welcome to the Blackjack Game repository! This project is a classic casino card game implemented using HTML, CSS, and JavaScript. [live link](https://akyeshi.github.io/blackjack/ "target=_blank")
 
 Blackjack, also known as twenty-one, is a popular casino banking game. The goal of the game is to beat the dealer by getting a hand value that is closer to 21 than the dealer's hand, without going over 21. This repository contains the code for a web-based Blackjack game that allows users to play against a virtual dealer.
 
